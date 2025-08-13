@@ -33,3 +33,5 @@ pnpm-lock.yaml
 
 # template related files
 example-collection/
+node_modules/@aptos-labs/aptos-ui-components/dist/
+node_modules/@aptos-labs/
