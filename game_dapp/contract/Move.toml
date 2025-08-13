@@ -1,0 +1,12 @@
+[package]
+name = "GameDapp"
+version = "1.0.0"
+authors = []
+
+[addresses]
+GameDapp = "0x0bb772235999bdebb244891c154d5d98b85ed8f88c1605346f26b423c18179c6"
+
+[dependencies]
+AptosFramework = { git = "https://github.com/aptos-labs/aptos-framework.git", rev = "mainnet", subdir = "aptos-framework" }
+
+[dev-dependencies]
