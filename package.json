@@ -1,12 +1,15 @@
 {
   "dependencies": {
     "@aptos-labs/wallet-adapter-core": "^7.1.1",
+    "@react-three/fiber": "^9.3.0",
     "framer-motion": "^12.23.12",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "three": "^0.179.1"
   },
   "devDependencies": {
     "@types/react": "^19.1.10",
-    "@types/react-dom": "^19.1.7"
+    "@types/react-dom": "^19.1.7",
+    "@types/three": "^0.179.0"
   }
 }

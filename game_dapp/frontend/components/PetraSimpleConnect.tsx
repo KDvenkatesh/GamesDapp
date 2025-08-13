@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 const PetraSimpleConnect: React.FC = () => {
   const [address, setAddress] = useState<string | null>(null);
-  // Save address to localStorage when it changes
+  // Save address to sessionStorage when it changes
   useEffect(() => {
     if (address) {
-      localStorage.setItem("petra_wallet_address", address);
+      sessionStorage.setItem("petra_wallet_address", address);
     }
   }, [address]);
   const [error, setError] = useState<string | null>(null);
@@ -40,7 +40,7 @@ const PetraSimpleConnect: React.FC = () => {
       } catch {}
     }
     setAddress(null);
-    localStorage.removeItem("petra_wallet_address");
+    sessionStorage.removeItem("petra_wallet_address");
   };
 
   return (

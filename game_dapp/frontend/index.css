@@ -4,3 +4,16 @@
 @tailwind utilities;
 
 /* Custom styles can be added below */
+
+/* frontend/index.css */
+
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover; /* Ensures the video covers the screen without distortion */
+  z-index: -1;      /* Pushes the video behind all other content */
+  opacity: 0.15;    /* Optional: Makes the video less distracting */
+}

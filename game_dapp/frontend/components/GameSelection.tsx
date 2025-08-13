@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+// frontend/components/ui/GameSelection.tsx
+
+import React, { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 type GameCard = {
@@ -9,6 +11,7 @@ type GameCard = {
   icon: string;
 };
 
+// Add the 4 new games to this array
 const games: GameCard[] = [
   {
     title: "Dice Game",
@@ -33,11 +36,67 @@ const games: GameCard[] = [
     description: "Classic snake game with a crypto twist!",
     path: "/snake-game",
     icon: "🐍"
+  },
+  // --- 🆕 Add these new game cards ---
+  {
+    title: "Tic-Tac-Toe",
+    description: "A classic grid game against a simple AI.",
+    path: "/tic-tac-toe",
+    icon: "⭕"
+  },
+  {
+    title: "Hangman",
+    description: "Guess the secret crypto-themed word.",
+    path: "/hangman",
+    icon: "🤔"
+  },
+  {
+    title: "Memory Match",
+    description: "Find all the matching pairs of cards.",
+    path: "/memory-match",
+    icon: "🧠"
+  },
+  {
+    title: "Flappy Clone",
+    description: "Navigate the bird through the pipes.",
+    path: "/flappy-clone",
+    icon: "🐦"
+  },
+  // --- End of new games ---
+  {
+    title: "Treasure Hunt 3D",
+    description: "Explore a 3D map and collect treasure chests!",
+    path: "/treasure-hunt-3d",
+    icon: "🗺️"
+  },
+  {
+    title: "3D Racing",
+    description: "Race NFT cars or hovercrafts in 3D!",
+    path: "/racing-3d",
+    icon: "🏎️"
+  },
+  {
+    title: "Time Rift Bike Racer",
+    description: "Race through time rifts on futuristic bikes!",
+    path: "/time-rift-bike-racer",
+    icon: "🚴⏳"
+  },
+  {
+    title: "Battle Royale Survival",
+    description: "Survive in a 3D battle royale arena!",
+    path: "/battle-royale-survival",
+    icon: "🔫"
   }
 ];
 
+
 export default function GameSelection() {
-  const [address, setAddress] = useState(() => localStorage.getItem("petra_wallet_address"));
+  const [address, setAddress] = useState<string | null>(null);
+
+  useEffect(() => {
+    const stored = sessionStorage.getItem("petra_wallet_address");
+    if (stored) setAddress(stored);
+  }, []);
 
   const handleDisconnect = async () => {
     if ((window as any).aptos && (window as any).aptos.disconnect) {
@@ -46,13 +105,13 @@ export default function GameSelection() {
       } catch {}
     }
     setAddress(null);
-    localStorage.removeItem("petra_wallet_address");
+    sessionStorage.removeItem("petra_wallet_address");
     window.location.href = "/";
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-8 flex items-center justify-center relative overflow-hidden">
-      {/* Animated background glow */}
+      {/* ... rest of the component JSX is unchanged ... */}
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -60,24 +119,27 @@ export default function GameSelection() {
         className="pointer-events-none absolute -inset-20 z-0 rounded-[3rem] bg-gradient-to-tr from-blue-500/20 via-fuchsia-400/10 to-cyan-400/20 blur-3xl"
       />
       <div className="max-w-6xl w-full mx-auto relative z-10">
-        {/* Animated Disconnect button top right */}
-        <AnimatePresence>
+        <div className="absolute right-0 top-0 mt-4 mr-2 flex items-center gap-3 z-10">
           {address && (
-            <motion.button
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-              onClick={handleDisconnect}
-              className="absolute right-0 top-0 mt-4 mr-2 px-4 py-2 bg-gradient-to-r from-red-500 via-pink-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white rounded-lg font-semibold shadow-lg transition-colors z-10"
-              whileHover={{ scale: 1.07, rotate: -2 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              Disconnect Wallet
-            </motion.button>
+            <>
+              <span className="bg-white/10 text-white px-3 py-1 rounded-full border border-white/20 text-xs font-mono shadow">
+                {address.slice(0, 6)}...{address.slice(-4)}
+              </span>
+              <motion.button
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                onClick={handleDisconnect}
+                className="px-4 py-2 bg-gradient-to-r from-red-500 via-pink-500 to-rose-500 hover:from-red-600 hover:to-rose-600 text-white rounded-lg font-semibold shadow-lg transition-colors"
+                whileHover={{ scale: 1.07, rotate: -2 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                Disconnect Wallet
+              </motion.button>
+            </>
           )}
-        </AnimatePresence>
-        {/* Animated header */}
+        </div>
         <motion.h1
           initial={{ opacity: 0, y: -40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -86,14 +148,13 @@ export default function GameSelection() {
         >
           <span className="bg-gradient-to-r from-blue-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent">Choose Your Game</span>
         </motion.h1>
-        {/* Animated game cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {games.map((game, i) => (
             <motion.div
               key={game.path}
               initial={{ opacity: 0, y: 40, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 + i * 0.12, type: "spring", stiffness: 90 }}
+              transition={{ duration: 0.5, delay: 0.2 + i * 0.08, type: "spring", stiffness: 90 }}
               whileHover={{ scale: 1.06, boxShadow: "0 8px 32px 0 rgba(0,0,0,0.18)", rotate: 1 }}
               whileTap={{ scale: 0.98 }}
               className="relative group"
@@ -112,7 +173,6 @@ export default function GameSelection() {
                 <h2 className="text-2xl font-bold text-white mb-2 text-center drop-shadow-sm">{game.title}</h2>
                 <p className="text-slate-300 text-base text-center">{game.description}</p>
               </Link>
-              {/* Glow effect on hover */}
               <motion.div
                 className="absolute inset-0 rounded-3xl pointer-events-none group-hover:bg-blue-400/10 group-hover:blur-md transition"
                 initial={{ opacity: 0 }}
