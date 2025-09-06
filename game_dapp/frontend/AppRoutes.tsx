@@ -16,6 +16,11 @@ import TicTacToeGame from "./components/ui/TicTacToeGame";
 import HangmanGame from "./components/ui/HangmanGame";
 import MemoryMatchGame from "./components/ui/MemoryMatchGame";
 import FlappyCloneGame from "./components/ui/FlappyCloneGame";
+// 3D Game Components
+import TreasureHunt3D from "./components/3d/TreasureHunt3D";
+import TimeRiftBikeRacer from "./components/3d/TimeRiftBikeRacer";
+import Racing3D from "./components/3d/Racing3D";
+import BattleRoyaleSurvival from "./components/3d/BattleRoyaleSurvival";
 
 export default function AppRoutes(): JSX.Element {
   return (
@@ -47,6 +52,11 @@ export default function AppRoutes(): JSX.Element {
             <Route path="/hangman" element={<HangmanGame />} />
             <Route path="/memory-match" element={<MemoryMatchGame />} />
             <Route path="/flappy-clone" element={<FlappyCloneGame />} />
+            {/* New 3D Game Routes */}
+            <Route path="/treasure-hunt-3d" element={<TreasureHunt3D />} />
+            <Route path="/time-rift-bike-racer" element={<TimeRiftBikeRacer />} />
+            <Route path="/racing-3d" element={<Racing3D />} />
+            <Route path="/battle-royale-survival" element={<BattleRoyaleSurvival />} />
           </Route>
 
           <Route path="*" element={<Navigate to="/" replace />} />

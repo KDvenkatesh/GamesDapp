@@ -1,4 +1,4 @@
-module GameDapp::Games {
+﻿module GameDapp::Games {
     use std::signer;
     use std::table::{Self, Table};
     use std::vector;
@@ -12,7 +12,6 @@ module GameDapp::Games {
     }
 
     struct RPSData has key {
-        choice: u8, // 0=rock,1=paper,2=scissors
         result: u8, // 0=draw,1=win,2=lose
     }
 
