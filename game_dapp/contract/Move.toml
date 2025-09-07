@@ -4,7 +4,7 @@ version = "1.0.0"
 authors = []
 
 [addresses]
-GameDapp = "0x0bb772235999bdebb244891c154d5d98b85ed8f88c1605346f26b423c18179c6"
+GameDapp = "0x7906ab5611f09e6241ea7a5bf8273d86299c52d9559a390d47a2482acb953d9d"
 
 [dependencies]
 AptosFramework = { git = "https://github.com/aptos-labs/aptos-framework.git", rev = "mainnet", subdir = "aptos-framework" }
